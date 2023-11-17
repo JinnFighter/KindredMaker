@@ -1,10 +1,12 @@
+using Logic;
+
 namespace Client.CharacterSheet
 {
     public class ModelCharacterSheet : IModelCharacterSheet
     {
-        public ModelCharacterSheet()
+        public ModelCharacterSheet(Character character)
         {
-            CharacterInfo = new ModelCharacterInfo();
+            CharacterInfo = new ModelCharacterInfo(character.CharacterInfo);
             Attributes = new ModelAttributes();
             Skills = new ModelSkills();
             CharacterStats = new ModelCharacterStats();

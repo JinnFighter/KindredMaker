@@ -1,5 +1,7 @@
 using Client.CharacterSheet;
+using Logic;
 using UnityEngine;
+using CharacterInfo = Logic.CharacterInfo;
 
 namespace Init
 {
@@ -11,8 +13,11 @@ namespace Init
 
         private void Awake()
         {
+            var character = new Character(new CharacterInfo("TestName", "None", EClan.Malkavian, "TestPlayerName",
+                EPredatorType.Sandman, 13, "TestChronicleName", "To Test", "To Be Tested"));
+
             _controllerCharacterSheet =
-                new ControllerCharacterSheet(new ModelCharacterSheet(), _viewCharacterSheet);
+                new ControllerCharacterSheet(new ModelCharacterSheet(character), _viewCharacterSheet);
         }
 
         private void Start()

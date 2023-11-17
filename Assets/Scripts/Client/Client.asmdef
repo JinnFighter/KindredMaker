@@ -2,7 +2,8 @@
     "name": "Client",
     "rootNamespace": "",
     "references": [
-        "GUID:b591020e5bbda6247a5fd0a218a89bc7"
+        "GUID:b591020e5bbda6247a5fd0a218a89bc7",
+        "GUID:e97b0d7dbea9bc14f92a3b2a1486fbd9"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -4,10 +4,6 @@ namespace Client.CharacterSheet
 {
     public class ControllerCharacterInfo : BaseController<IModelCharacterInfo, ViewCharacterInfo>
     {
-        public ControllerCharacterInfo(IModelCharacterInfo model, ViewCharacterInfo view) : base(model, view)
-        {
-        }
-
         protected override void InitInner()
         {
             SubscriptionAggregator.ListenEvent(Model.CharacterName, HandleCharacterNameChanged, true);

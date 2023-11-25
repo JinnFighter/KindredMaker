@@ -2,18 +2,14 @@ using Reactivity;
 
 namespace Client
 {
-    public class BaseController<TModel, TView> : IController where TModel : IModel where TView : BaseView
+    public class BaseController<TModel, TView> : IBaseController where TModel : IModel where TView : BaseView
     {
         protected readonly SubscriptionAggregator SubscriptionAggregator = new();
 
-        public BaseController(TModel model, TView view)
-        {
-            Model = model;
-            View = view;
-        }
-
-        protected TModel Model { get; }
-        protected TView View { get; }
+        protected TModel Model { get; private set; }
+        protected TView View { get; private set; }
+        
+        protected IControllerFactory ControllerFactory { get; private set; }
 
         public void Init()
         {
@@ -24,6 +20,13 @@ namespace Client
         {
             SubscriptionAggregator.Unsubscribe();
             TerminateInner();
+        }
+
+        public void Setup(IModel model, BaseView view, IControllerFactory controllerFactory)
+        {
+            Model = (TModel)model;
+            View = (TView)view;
+            ControllerFactory = controllerFactory;
         }
 
         protected virtual void InitInner()

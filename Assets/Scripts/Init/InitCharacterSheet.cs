@@ -1,6 +1,8 @@
+using Client;
 using Client.CharacterSheet;
 using Logic;
 using UnityEngine;
+using Zenject;
 using CharacterInfo = Logic.CharacterInfo;
 
 namespace Init
@@ -11,13 +13,16 @@ namespace Init
 
         private ControllerCharacterSheet _controllerCharacterSheet;
 
+        [Inject] private IControllerFactory _controllerFactory;
+
         private void Awake()
         {
             var character = new Character(new CharacterInfo("TestName", "None", EClan.Malkavian, "TestPlayerName",
                 EPredatorType.Sandman, 13, "TestChronicleName", "To Test", "To Be Tested"));
 
             _controllerCharacterSheet =
-                new ControllerCharacterSheet(new ModelCharacterSheet(character), _viewCharacterSheet);
+                _controllerFactory.CreateController<ControllerCharacterSheet>(new ModelCharacterSheet(character),
+                    _viewCharacterSheet);
         }
 
         private void Start()

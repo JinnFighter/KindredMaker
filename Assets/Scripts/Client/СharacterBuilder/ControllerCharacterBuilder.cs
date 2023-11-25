@@ -1,32 +1,19 @@
-﻿using System.Collections.Generic;
-using Client.СharacterBuilder.Steps;
+﻿using Client.СharacterBuilder.Steps;
 using Reactivity;
 
 namespace Client.СharacterBuilder
 {
     public class ControllerCharacterBuilder : BaseController<IModelCharacterBuilder, ViewCharacterBuilder>
     {
-        private readonly List<IController> _subControllers = new();
-
         protected override void InitInner()
         {
-            for (var i = 0; i < Model.Steps.Count; i++)
-            {
-                var controller =
-                    ControllerFactory.CreateController<ControllerBuilderStepAttributes>(Model.Steps[i], View.Steps[i]);
-                _subControllers.Add(controller);
-
-                controller.Init();
-            }
-
             SubscriptionAggregator.ListenEventExtended(Model.CurrentStep, HandleCurrentStepChanged, true);
         }
 
-        protected override void TerminateInner()
+        protected override void RegisterChildControllers()
         {
-            foreach (var controller in _subControllers) controller.Terminate();
-
-            _subControllers.Clear();
+            for (var i = 0; i < Model.Steps.Count; i++)
+                RegisterChildController<ControllerBuilderStepAttributes>(Model.Steps[i], View.Steps[i]);
         }
 
         private void HandleCurrentStepChanged(object sender, PropertyEventArgs<int> e)

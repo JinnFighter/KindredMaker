@@ -4,10 +4,6 @@ namespace Client.DiceRoller
 {
     public class ControllerDiceRollResult : BaseController<IModelDiceRollResult, ViewDiceRollResult>
     {
-        public ControllerDiceRollResult(IModelDiceRollResult model, ViewDiceRollResult view) : base(model, view)
-        {
-        }
-
         protected override void InitInner()
         {
             var diceCount = Model.RollResults.Count;

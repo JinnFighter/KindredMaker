@@ -54,6 +54,16 @@ namespace Reactivity
             AddSubscription(caller, handler, () => caller.OnValueChanged -= handler);
             if(invokeImmediately) handler.Invoke(caller, new GenericEventArg<TPropertyType>(caller.Value));
         }
+        
+        public void ListenEventExtended<TPropertyType>(IReactiveProperty<TPropertyType> caller, EventHandler<PropertyEventArgs<TPropertyType>> handler,
+            bool invokeImmediately = false)
+        {
+            CheckParameters(caller, handler);
+
+            caller.OnValueChangedExtended += handler;
+            AddSubscription(caller, handler, () => caller.OnValueChangedExtended -= handler);
+            if(invokeImmediately) handler.Invoke(caller, new PropertyEventArgs<TPropertyType>(caller.Value, caller.Value));
+        }
 
         private void AddSubscription(object notifyContainer, Delegate handler, Action unsubscribeAction)
         {

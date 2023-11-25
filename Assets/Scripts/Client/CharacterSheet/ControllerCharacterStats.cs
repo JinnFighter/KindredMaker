@@ -1,22 +1,6 @@
 ﻿namespace Client.CharacterSheet
 {
-    public class ControllerCharacterStats : IController
+    public class ControllerCharacterStats : BaseController<IModelCharacterStats, ViewCharacterStats>
     {
-        private readonly IModelCharacterStats _model;
-        private readonly ViewCharacterStats _view;
-
-        public ControllerCharacterStats(IModelCharacterStats model, ViewCharacterStats view)
-        {
-            _model = model;
-            _view = view;
-        }
-
-        public void Init()
-        {
-        }
-
-        public void Terminate()
-        {
-        }
     }
 }

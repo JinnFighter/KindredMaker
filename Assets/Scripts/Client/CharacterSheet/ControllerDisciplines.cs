@@ -1,22 +1,6 @@
 ﻿namespace Client.CharacterSheet
 {
-    public class ControllerDisciplines : IController
+    public class ControllerDisciplines : BaseController<IModelDisciplines, ViewDisciplines>
     {
-        private readonly IModelDisciplines _model;
-        private readonly ViewDisciplines _view;
-
-        public ControllerDisciplines(IModelDisciplines model, ViewDisciplines view)
-        {
-            _model = model;
-            _view = view;
-        }
-
-        public void Init()
-        {
-        }
-
-        public void Terminate()
-        {
-        }
     }
 }
